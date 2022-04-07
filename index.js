@@ -88,6 +88,10 @@ app.patch('/order/:id', (req, res) => {
   res.status(201).json('Pedido pronto!')
 })
 
+app.delete('/order/:id', () => {
+  
+})
+
 app.listen(port, () => {
   console.log(`🚀 Server running on port ${port}`)
 })
