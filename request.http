@@ -1,0 +1,54 @@
+POST http://localhost:3000/order
+Content-Type: application/json
+
+# {
+#   "clientName": "Marcelo Luiz",
+#   "order": "1 hotdog, 1 guarana, 1 sorvete",
+#   "price": 44.50,
+#   "status": "Em preparação"
+# }
+# # {
+#   "clientName": "Luiz",
+#   "order": "1 X-salada, 1 batata grande, 1 coca-cola",
+#   "price": 44.50,
+#   "status": "Em preparação"
+# }
+{
+  "clientName": "Julia",
+  "order": "1 X-Tudo, 1 batata pequena, 1 coca-cola 500ml",
+  "price": 52.90,
+  "status": "Em preparação"
+}
+
+###
+
+GET http://localhost:3000/orders
+
+###
+
+GET http://localhost:3000/order/022e97b4-f8dc-4d65-932e-87936a4433c2
+
+###
+
+PUT http://localhost:3000/order/7818fa72-0a9d-42b3-9bb0-dec518fb366a
+Content-Type: application/json
+
+{
+  "clientName": "Julia Souza",
+  "order": "1 X-Tudo, 1 batata pequena, 1 coca-cola 500ml",
+  "price": 52.90,
+  "status": "Em preparação"
+}
+
+###
+
+PATCH http://localhost:3000/order/022e97b4-f8dc-4d65-932e-87936a4433c2
+Content-Type: application/json
+
+{
+  "status": "Pronto"
+}
+
+###
+
+DELETE http://localhost:3000/users/a541d9d5-4b89-402d-8fda-be6513ae0d70
