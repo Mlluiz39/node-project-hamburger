@@ -9,14 +9,14 @@ Neste projeto foi utilizado apenas EXPRESS e NODEMON como módulos externos
 para criar ID dinamicamente foi utilizado o randomUUID() do core module do NODE
 ou seja foi utilizado o modulo interno crypto que esta disponível a partir do node 15.x
 caso queira instalar em outro projetos.
-### basta importar com `const { randomUUID } = require('crypto')`
+### basta importar com ```const { randomUUID } = require('crypto')```
 
 Para armazenar as informações foi utilizado outro core module do node o 
 fs (file system) que cria um arquivo json na raiz com as informações inseridas.
 Assim no reload do servidor não são perdidas as informações armazenadas, uma vez 
 que não estamos utilizando nenhum DB.
 
-### Basta importar no inicio com `const fs = require('fs')`
+### Basta importar no inicio com ```const fs = require('fs')```
 
 Também estou utilizando uma extensão do VScode que faz os requests HTTP tudo para 
 não ter que sair da interface do editor de código.
