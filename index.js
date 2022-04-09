@@ -27,6 +27,21 @@ fs.readFile('orders.json', (error, data) => {
   }
 })
 
+const checksForId = (req, res, next) => {
+  const { id } = req.params
+  const findIndex = orders.findIndex(order => order.id === id)
+  const findOrder = orders.find(order => order.id === id)
+
+  if (findIndex < 0 || findOrder < 0) {
+    res.status(404).json({ error: 'User not found!' })
+  } else {
+    req.index = findIndex
+    req.order = findOrder
+  }
+
+  next()
+}
+
 app.post('/order', (req, res) => {
   const { clientName, order, price, status } = req.body
   let orderHamburger = {
@@ -48,20 +63,18 @@ app.get('/orders', (req, res) => {
   res.status(200).json(orders)
 })
 
-app.get('/order/:id', (req, res) => {
-  const { id } = req.params
-  const order = orders.find(order => order.id === id)
+app.get('/order/:id', checksForId, (req, res) => {
+  const order = req.order
 
   res.status(201).json(order)
 })
 
-app.put('/order/:id', (req, res) => {
-  const { id } = req.params
+app.put('/order/:id', checksForId, (req, res) => {
+  const index = req.index
   const { clientName, order, price } = req.body
-  const orderIndex = orders.findIndex(order => order.id === id)
 
-  orders[orderIndex] = {
-    ...orders[orderIndex],
+  orders[index] = {
+    ...orders[index],
     clientName,
     order,
     price,
@@ -72,14 +85,13 @@ app.put('/order/:id', (req, res) => {
   res.status(201).json('Pedido atualizado com sucesso em preparação!')
 })
 
-app.patch('/order/:id', (req, res) => {
-  const { id } = req.params
+app.patch('/order/:id', checksForId, (req, res) => {
   const { status } = req.body
 
-  const orderIndex = orders.findIndex(order => order.id === id)
+  const index = req.index
 
-  orders[orderIndex] = {
-    ...orders[orderIndex],
+  orders[index] = {
+    ...orders[index],
     status,
   }
 
@@ -88,8 +100,12 @@ app.patch('/order/:id', (req, res) => {
   res.status(201).json('Pedido pronto!')
 })
 
-app.delete('/order/:id', () => {
-  
+app.delete('/order/:id', checksForId, (req, res) => {
+  const index = req.index
+
+  orders.splice(index, 1)
+
+  res.json('Pedido excluído!')
 })
 
 app.listen(port, () => {
