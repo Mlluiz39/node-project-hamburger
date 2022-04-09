@@ -42,7 +42,12 @@ const checksForId = (req, res, next) => {
   next()
 }
 
-app.post('/order', (req, res) => {
+const requestMethodsWithUrl = (req, res, next) => {
+  console.log(`[${req.method}]-${req.url}`)
+  next()
+}
+
+app.post('/order', requestMethodsWithUrl, (req, res) => {
   const { clientName, order, price, status } = req.body
   let orderHamburger = {
     id: randomUUID(),
@@ -59,17 +64,17 @@ app.post('/order', (req, res) => {
   res.status(201).json('Pedido realizado com sucesso!')
 })
 
-app.get('/orders', (req, res) => {
+app.get('/orders', requestMethodsWithUrl, (req, res) => {
   res.status(200).json(orders)
 })
 
-app.get('/order/:id', checksForId, (req, res) => {
+app.get('/order/:id', checksForId, requestMethodsWithUrl, (req, res) => {
   const order = req.order
 
   res.status(201).json(order)
 })
 
-app.put('/order/:id', checksForId, (req, res) => {
+app.put('/order/:id', checksForId, requestMethodsWithUrl, (req, res) => {
   const index = req.index
   const { clientName, order, price } = req.body
 
@@ -85,7 +90,7 @@ app.put('/order/:id', checksForId, (req, res) => {
   res.status(201).json('Pedido atualizado com sucesso em preparação!')
 })
 
-app.patch('/order/:id', checksForId, (req, res) => {
+app.patch('/order/:id', checksForId, requestMethodsWithUrl, (req, res) => {
   const { status } = req.body
 
   const index = req.index
@@ -100,7 +105,7 @@ app.patch('/order/:id', checksForId, (req, res) => {
   res.status(201).json('Pedido pronto!')
 })
 
-app.delete('/order/:id', checksForId, (req, res) => {
+app.delete('/order/:id', checksForId, requestMethodsWithUrl, (req, res) => {
   const index = req.index
 
   orders.splice(index, 1)

@@ -15,22 +15,21 @@ GET http://localhost:3000/orders
 
 ###
 
-GET http://localhost:3000/order/6d79b32a-c2fe-48ae-82a0-79243d7ff682
+GET http://localhost:3000/order/3d661be9-e949-4dcc-9157-b39991008c64
 ###
 
-PUT http://localhost:3000/order/6d79b32a-c2fe-48ae-82a0-79243d7ff682
+PUT http://localhost:3000/order/3d661be9-e949-4dcc-9157-b39991008c64
 Content-Type: application/json
 
 {
   "clientName": "Marcelo Souza",
     "order": "1 hotdog, 1 guarana, 1 sorvete",
-    "price": 19.9,
-    "status": "Em preparação"
+    "price": 29.9 
 }
 
 ###
 
-PATCH http://localhost:3000/order/6d79b32a-c2fe-48ae-82a0-79243d7ff682
+PATCH http://localhost:3000/order/3d661be9-e949-4dcc-9157-b39991008c64
 Content-Type: application/json
 
 {
@@ -39,4 +38,4 @@ Content-Type: application/json
 
 ###
 
-DELETE http://localhost:3000/order/515c9d2b-b66c-4ac7-9527-887efc9d4543
+DELETE http://localhost:3000/order/ff666a25-faf3-47de-82ec-8da77a0472da
